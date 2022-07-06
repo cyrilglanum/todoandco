@@ -1,9 +1,11 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
-
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+  _defaults:
+    autoconfigure: true
+    autowire: true
+    public: false
+  AppBundle\:
+    exclude: '%kernel.project_dir%/src/AppBundle/{Entity,Repository,Resources,Tests}'
+    resource: '%kernel.project_dir%/src/AppBundle/*'
+  AppBundle\Controller\:
+    resource: '%kernel.project_dir%/src/AppBundle/*'
+    tags: ['controller.service_arguments']
